@@ -10,11 +10,19 @@ function App() {
   // Event for when a new person is added and using preventDefault on the addedPerson so that the page doesn't reload.
   const addPerson = (e) => {
     e.preventDefault();
-    if(newName.trim() !== '') {
-      setPersons([...persons, { name: newName }])
-      setNewName('')
+    
+    if (newName.trim() !== '') {
+      // Check if the name is already in the list
+      const nameExists = persons.some(person => person.name === newName);
+      
+      if (nameExists) {
+        alert(`${newName} is already in the phonebook.`);
+      } else {
+        setPersons([...persons, { name: newName }]);
+        setNewName('');
+      }
     }
-  }
+  };
 
   // input for name and changing the numebrs list for when the button is clicked to show all the people.
   // This is done by taking the setNewName state and showing its value and putting it in the newName for it to show in the Numbers section. 
